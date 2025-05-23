@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Your Cart</h2>
+  <form method="POST">
+    {% for item in items %}
+      <div>
+        <strong>{{ item.product.name }}</strong> —
+        ₹{{ '{:.2f}'.format(item.product.price) }} ×
+        <input type="number" name="qty_{{ item.id }}" value="{{ item.quantity }}" min="0" style="width: 4em;">
+      </div>
+      <hr>
+    {% endfor %}
+    <p><strong>Total: ₹{{ '{:.2f}'.format(total) }}</strong></p>
+    <button type="submit" class="btn">Update Cart</button>
+  </form>
+  <a class="btn" href="{{ url_for('checkout') }}">Checkout</a>
+{% endblock %}
